@@ -7,8 +7,8 @@ package com.anunay.recursion.intro;
 public class FibonacciProblem {
 
     public static void main(String[] args) {
-        int n = 0;
-        int ans = fib(n); // should return "8" --> 0, 1, 1, 2, 3, 5, 8
+        int n = 6;
+        int ans = fib(n); // should return "8" --> 0, 1, 1, 2, 3, 5, |_8_|
         System.out.println(n + "th fibonacci number is: " + ans);
     }
 
