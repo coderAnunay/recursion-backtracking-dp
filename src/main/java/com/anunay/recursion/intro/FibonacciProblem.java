@@ -14,11 +14,8 @@ public class FibonacciProblem {
 
     static int fib(int n) {
         // Base condition for 0th, 1st and 2nd Fibonacci numbers
-        if (n < 3) {
-            if (n == 0) {
-                return 0;
-            }
-            return 1;
+        if (n < 2) {
+            return n;
         }
         // Recurrence
         return fib(n-1) + fib(n-2);
