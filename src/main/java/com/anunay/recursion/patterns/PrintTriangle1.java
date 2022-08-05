@@ -12,6 +12,16 @@ public class PrintTriangle1 {
         print1(4,0);
         System.out.println();
         print2(4, 0);
+        System.out.println();
+
+        // Prints a normal triangle
+        /**
+         *  *
+         *  **
+         *  ***
+         *  ****
+         */
+        printNormal(4, 0);
     }
 
     private static void print1(int row, int col) {
@@ -40,6 +50,23 @@ public class PrintTriangle1 {
         } else {
             System.out.println();
             print2(row-1, 0);
+        }
+    }
+
+    /**
+     * Prints a normal triangle
+     */
+    static void printNormal(int row, int col) {
+        // Base Condition
+        if (row == 0) {
+            return;
+        }
+        if (col < row) {
+            printNormal(row, col+1);
+            System.out.print("*");
+        } else {
+            printNormal(row-1, 0);
+            System.out.println();
         }
     }
 }
