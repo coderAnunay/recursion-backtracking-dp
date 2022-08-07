@@ -9,6 +9,8 @@ public class RecursiveMergeSort {
         int[] ans = mergeSort(arr);
         System.out.println("Array after sorting: " + Arrays.toString(ans));
         System.out.println("Original array not altered: " + Arrays.toString(arr));
+        mergeSortInPlace(arr, 0, arr.length);
+        System.out.println("Array after IN_PLACE sorting: " + Arrays.toString(arr));
     }
 
     static int[] mergeSort(int[] arr) {
@@ -60,5 +62,54 @@ public class RecursiveMergeSort {
 
         // return the merged array
         return mix;
+    }
+
+    // No need to return a new array as it is in-place sorting
+    static void mergeSortInPlace(int[] arr, int start, int end) {
+        // Base condition
+        if (end - start == 1) return;
+        // Mid index to help dividing array in place
+        int mid = start + (end - start)/2;
+        mergeSortInPlace(arr, start, mid);
+        mergeSortInPlace(arr, mid, end);
+
+        mergeInPlace(arr, start, mid, end);
+    }
+
+    private static void mergeInPlace(int[] arr, int start, int mid, int end) {
+        // Have to create a temporary array to store the sorted order for this recursive call
+        int[] mix = new int[end - start];
+
+        // Loop variables
+        int i = start;
+        int j = mid;
+        int k = 0;
+
+        while (i < mid && j < end) {
+            if (arr[i] < arr[j]) {
+                mix[k] = arr[i];
+                i++;
+            } else {
+                mix[k] = arr[j];
+                j++;
+            }
+            k++;
+        }
+
+        while (i < mid) {
+            mix[k] = arr[i];
+            i++;
+            k++;
+        }
+        while (j < end) {
+            mix[k] = arr[j];
+            j++;
+            k++;
+        }
+
+        // Now using the "mix" sorted order, sort the original array
+        for (int l = 0; l < mix.length; l++) {
+            arr[start + l] = mix[l];
+        }
     }
 }
