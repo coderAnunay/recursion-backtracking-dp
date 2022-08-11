@@ -1,26 +1,33 @@
 package com.anunay.recursion.subsequences;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class Subsequences {
+public class AsciiValueProblems {
 
     private static final String EMPTY = "EMPTY_STRING";
 
     public static void main(String[] args) {
-        String str = "abc";
-        System.out.format("Subsequences of %s:\n", str);
-        printSubsequences(str, "");
+        // Printing ascii value of a character
+        char c = 'a';
+        int ascii = c + 0;
+        System.out.println("ASCII value of 'a': " + ascii); // add 0 to it
 
-        // ArrayList of subsequences
-        ArrayList<String> subsequenceList = getSubsequenceList(str, "");
-        System.out.format("ArrayList of subsequences of %s: %s", str, subsequenceList);
+        // Print subsequences and ascii value
+        String str = "ab";
+        System.out.format("Subsequences with ascii for %s: \n", str);
+        printSubsequencesAscii(str, "");
+
+        // Print ArrayList of subsequences and ascii values
+        ArrayList<String> subsequences = getSubsequenceList(str, "");
+        System.out.format("Subsequences ArrayList with ascii for %s: %s\n", str, subsequences);
     }
 
     /**
-     * Given a string, print all subsequences of it
-     * E.g: "abc" ==> ["", "a", "b", "c", "ab", "ac", "bc", "abc"]
+     * Given a string, print the subsequences along with ascii value
+     * E.g, ab = {a, b, ab, 97, 98, 9798, a98, 97b, ""}
      */
-    static void printSubsequences(String given, String processed) {
+    static void printSubsequencesAscii(String given, String processed) {
         // Base condition: If given string is empty, print the processed string
         if (given.isEmpty()) {
             if (processed.isEmpty())
@@ -33,13 +40,15 @@ public class Subsequences {
         // Get the current character
         Character currentCharacter = given.charAt(0);
         // Take current character
-        printSubsequences(given.substring(1), processed + currentCharacter);
+        printSubsequencesAscii(given.substring(1), processed + currentCharacter);
         // Ignore current character
-        printSubsequences(given.substring(1), processed);
+        printSubsequencesAscii(given.substring(1), processed);
+        // Print the ascii value also
+        printSubsequencesAscii(given.substring(1), processed + (currentCharacter + 0));
     }
 
     /**
-     * Return an ArrayList of subsequences
+     * Return an ArrayList of subsequences and ascii
      * Without passing the list as argument
      */
     static ArrayList<String> getSubsequenceList(String given, String processed) {
@@ -62,10 +71,14 @@ public class Subsequences {
         ArrayList<String> left = getSubsequenceList(given.substring(1), processed + currentCharacter);
         // Ignore current character and store the right function call's return value
         ArrayList<String> right = getSubsequenceList(given.substring(1), processed);
+        // ArrayList for ascii value
+        ArrayList<String> ascii = getSubsequenceList(given.substring(1), processed + (currentCharacter + 0));
 
         // Finally return a mix of left and right function calls' return value
         subsequenceList.addAll(left);
         subsequenceList.addAll(right);
+        subsequenceList.addAll(ascii);
         return subsequenceList;
     }
+
 }
