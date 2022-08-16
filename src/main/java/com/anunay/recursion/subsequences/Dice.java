@@ -7,6 +7,7 @@ import java.util.List;
 /**
  * Question asked in Amazon
  * Given a dice, in which ways can we form a particular sum S?
+ * Note: This solution is not optimized. Use Dynamic Programming to achieve optimization
  */
 public class Dice {
     public static void main(String[] args) {
