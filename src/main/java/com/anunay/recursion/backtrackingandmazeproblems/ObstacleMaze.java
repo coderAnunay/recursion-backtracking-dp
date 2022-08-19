@@ -1,6 +1,8 @@
 package com.anunay.recursion.backtrackingandmazeproblems;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Given 3x3 maze with obstacle cell (represented by false value in a boolean matrix)
@@ -15,8 +17,9 @@ public class ObstacleMaze {
     };
 
     public static void main(String[] args) {
-        printPaths(0, 0, "", MAZE_3_BY_3);
         System.out.println("Number of paths from (0,0) to (2,2) with obstacle at (1,1): " + countPaths(0, 0, MAZE_3_BY_3));
+        printPaths(0, 0, "", MAZE_3_BY_3);
+        System.out.println("List of paths from (0,0) to (2,2) with obstacle at (1,1): " + getPathsList(0, 0, "", MAZE_3_BY_3));
     }
 
     /**
@@ -58,5 +61,33 @@ public class ObstacleMaze {
         }
 
         return countPaths(r+1, c, maze) + countPaths(r, c+1, maze);
+    }
+
+    /**
+     * Get a list of paths
+     */
+    static List<String> getPathsList(int r, int c, String processed, boolean[][] maze) {
+        // Base condition: If row=2 & col=2 for a 3x3 maze
+        // Add processed to list as we have found an answer
+        if (r == maze.length - 1 && c == maze[0].length - 1) {
+            List<String> list = new ArrayList<>();
+            list.add(processed);
+            return list;
+        }
+
+        // Create a local list
+        List<String> list = new ArrayList<>();
+
+        // If given cell is not an obstacle
+        if (maze[r][c]) {
+            if (r < maze.length - 1) {
+                list.addAll(getPathsList(r+1, c, processed + "D", maze));
+            }
+
+            if (c < maze[0].length - 1) {
+                list.addAll(getPathsList(r, c+1, processed + "R", maze));
+            }
+        }
+        return list;
     }
 }
