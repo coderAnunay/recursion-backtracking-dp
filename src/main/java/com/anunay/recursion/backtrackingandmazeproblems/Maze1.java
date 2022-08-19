@@ -5,6 +5,8 @@ import java.util.List;
 
 /**
  * Given a 3x3 Maze, count all paths from (3,3) to (1,1)
+ *
+ * Constraint: Only allowed to move Right or Down
  */
 public class Maze1 {
 
@@ -32,7 +34,7 @@ public class Maze1 {
      */
     static void printPaths(int r, int c, String processed) {
         // Base condition: row = 1 AND col = 1,
-        // then print the processed string as one fo the answers is found
+        // then print the processed string as one of the answers is found
         if (r == 1 && c == 1) {
             System.out.println(processed);
             return;
