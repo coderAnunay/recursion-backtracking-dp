@@ -114,6 +114,7 @@ public class AllPathsMaze {
         // This line is where the function call will be over
         // before function returns, also remove the changes made by the function (backtracking)
         maze[r][c] = true;
+        // Mark the cell = 0 so that changes made by this function call are reverted (backtracking)
         path[r][c] = 0;
     }
 }
